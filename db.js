@@ -14,5 +14,5 @@ async function getDatabase() {
 }
 
 module.exports = {
-    database
+    getDatabase
 }
