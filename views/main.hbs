@@ -10,6 +10,18 @@
     <p>{{message}}</p>
 
     <br>
+
+    {{#if edit_id}}
+    <p>Edit</p>
+    <form action="/update_book/{{edit_id}}" method="post">
+        <label for="title">title</label>
+        <input type="text" name="title" value="{{edit_book.title}}"> 
+        <label for="author">author</label>
+        <input type="text" name="author" value="{{edit_book.author}}">
+        <input type="submit" value="submit">
+    </form><br><br>
+    {{else}}
+    <p>Create</p>
     <form action="/store_book" method="post">
         <label for="title">title</label>
         <input type="text" name="title">
@@ -17,10 +29,11 @@
         <input type="text" name="author">
         <input type="submit" value="submit">
     </form><br><br>
+    {{/if}}
 
     <ul>
         {{#each books}}
-            <li>{{this.title}} - {{this.author}}</li>
+            <li>{{this.title}} - {{this.author}} <a href="/?edit_id={{this._id}}">Edit</a></li>
         {{/each}}
     </ul>
 </body>
