@@ -23,12 +23,20 @@ app.get('/',async (req,res)=>{
         edit_id = req.query.edit_id;
         edit_book = await collection.findOne({_id:new ObjectID(edit_id)});
     }
+    if(req.query.delete_id){
+        await collection.deleteOne({_id: new ObjectID(req.query.delete_id)});
+        return res.redirect('/?status=3');
+    }
+
     switch (req.query.status) {
         case '1':
             message = 'Inserted Succesfully'
             break;
         case '2':
             message = 'Updated Succesfully'
+            break;
+        case '3':
+            message = 'Deleted Succesfully'
             break;
     
         default:
